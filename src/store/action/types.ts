@@ -1,0 +1,4 @@
+const SAVE_FORM = 'SAVE_FORM';
+const EREASE_FORM = 'EREASE_FORM';
+
+export {SAVE_FORM, EREASE_FORM};
