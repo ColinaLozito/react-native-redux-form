@@ -12,4 +12,8 @@ export default {
   noticeBackground: tintColor,
   noticeText: '#fff',
   error: '#de3a2f',
+  darkGrey: '#5c5c5c',
+  lightGrey: '#a6a6a6',
+  white: '#ffffff',
+  errorLight: '#fa8282',
 };
