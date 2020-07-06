@@ -21,7 +21,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: colors.lightGrey,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     inputBox: {
         height: '100%',

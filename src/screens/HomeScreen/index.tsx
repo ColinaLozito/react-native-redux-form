@@ -6,6 +6,7 @@ import {
   Keyboard,
 } from 'react-native';
 import Input from '../../components/Input';
+import CustomPicker from '../../components/CustomPicker';
 
 import styles from './styles';
 
@@ -32,6 +33,42 @@ const items = [
   },
 ];
 
+
+const programmingLanguages = [
+  {
+    label: 'Java',
+    value: 'java',
+  },
+  {
+    label: 'JavaScript',
+    value: 'js',
+  },
+  {
+    label: 'Python',
+    value: 'python',
+  },
+  {
+    label: 'Ruby',
+    value: 'ruby',
+  },
+  {
+    label: 'C#',
+    value: 'csharp',
+  },
+  {
+    label: 'C++',
+    value: 'cpp',
+  },
+  {
+    label: 'C',
+    value: 'c',
+  },
+  {
+    label: 'Go',
+    value: 'go',
+  },
+];
+
 interface InputItem {
   fieldType: string,
   type: string,
@@ -44,7 +81,7 @@ export default (): JSX.Element => {
     if (item.fieldType === 'input') {
       return <Input key={pos} label={item.label} type={item.type} />;
     }
-    return null;
+    return <CustomPicker label={item.label} items={programmingLanguages} warn={false} />;
   });
 
   return (
