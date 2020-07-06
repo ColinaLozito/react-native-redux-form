@@ -1,24 +1,40 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-    developmentModeText: {
-      marginBottom: 20,
-      color: 'rgba(0,0,0,0.4)',
-      fontSize: 14,
-      lineHeight: 19,
-      textAlign: 'center',
-    },
-    contentContainer: {
-      paddingTop: 30,
-    },
-    getStartedText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      lineHeight: 24,
-      textAlign: 'center',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#addbcd',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: '10%',
+  },
+  contentContainer: {
+    backgroundColor: '#fff',
+    width: '90%',
+    height: '100%',
+    flexDirection: 'column',
+  },
+  titleWrapper: {
+    width: '100%',
+    height: 60,
+    marginTop: 20,
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  formTitle: {
+    fontSize: 20,
+    color: 'rgba(96,100,109, 1)',
+    lineHeight: 24,
+    textAlign: 'center',
+
+  },
+  formContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    width: '90%',
+    paddingTop: 10,
+    paddingHorizontal: '10%',
+  },
+});
