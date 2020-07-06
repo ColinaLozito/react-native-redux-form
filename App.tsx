@@ -6,6 +6,7 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './src/store';
 import HomeScreen from './src/screens/HomeScreen';
+import ErrorBoundary from './src/containers/ErrorBoundary'
 
 const styles = StyleSheet.create({
   container: {
@@ -18,19 +19,24 @@ interface Props {
   skipLoadingScreen?: boolean;
 }
 
-const App: React.FC<Props> = ({ skipLoadingScreen }: Props): JSX.Element => {
-  const [loadingComplete, setLoadingComplate] = useState(false);
+type Loading = boolean
+type Async = () => Promise<void>
+type ErrorHandle = (error: Error) => void
+type Fnc = () => void
 
-  const loadResourcesAsync = async () => {
+const App: React.FC<Props> = ({ skipLoadingScreen }: Props) => {
+  const [loadingComplete, setLoadingComplate] = useState<Loading>(false);
+
+  const loadResourcesAsync: Async = async () => {
     // here load resources at start of the app
   };
 
-  const handleLoadingError = (error: Error) => {
+  const handleLoadingError: ErrorHandle = (error: Error) => {
     // handle errors
     console.warn(error);
   };
 
-  const handleFinishLoading = () => {
+  const handleFinishLoading: Fnc = () => {
     // on finish loading resources
     setLoadingComplate(true);
   };
@@ -46,16 +52,18 @@ const App: React.FC<Props> = ({ skipLoadingScreen }: Props): JSX.Element => {
     );
   }
   return (
-    <Provider store={store}>
-      <PersistGate loading={<View />} persistor={persistor}>
-        <ActionSheetProvider>
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <HomeScreen />
-          </View>
-        </ActionSheetProvider>
-      </PersistGate>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <PersistGate loading={<View />} persistor={persistor}>
+          <ActionSheetProvider>
+            <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <HomeScreen />
+            </View>
+          </ActionSheetProvider>
+        </PersistGate>
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
