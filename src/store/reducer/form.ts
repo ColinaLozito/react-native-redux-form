@@ -24,7 +24,7 @@ const form = (state = INITIAL_STATE, action: ActionType): any => {
   console.log('STATE',state);
   switch (action.type) {
     case 'SAVE_FORM':
-      break;
+      return action.payload;
     case 'EREASE_FORM':
       return INITIAL_STATE;
     default:
