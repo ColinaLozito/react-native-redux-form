@@ -1,13 +1,22 @@
 import {SAVE_FORM, EREASE_FORM} from './types';
 
-const saveForm = (): any => ({
+interface FormValue {
+    inputKey: string,
+    inputValue: string
+}
+
+const getFormState = ({form}: any): any => ({form});
+
+const saveForm = (value: FormValue): any =>({
     type: SAVE_FORM,
-    payload: {}
+    payload: {
+        value,
+    },
 });
 
 const ereaseForm = (): any => ({
     type: EREASE_FORM,
-    payload: {}
+    payload: {},
 });
 
-export {saveForm, ereaseForm}
+export {getFormState, saveForm, ereaseForm};

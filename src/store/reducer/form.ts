@@ -1,30 +1,26 @@
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
-const INITIAL_STATE: FormInterface = {
-  ssn: null,
-  phone: null,
-  email: null,
-  country: null,
-};
+const INITIAL_STATE = {};
 
 interface FormInterface {
-  ssn: number | null,
-  phone: string | null,
-  email: string | null,
-  country: string | null,
+  ssn: string,
+  phone: string,
+  email: string,
+  country: string,
 }
 
 type ActionType = {
   type: string,
-  payload: FormInterface
+  payload: {
+    value:FormInterface
+  }
 }
 
-const form = (state = INITIAL_STATE, action: ActionType): any => {
-  console.log('STATE',state);
+const form = (_state = INITIAL_STATE, action: ActionType): any => {
   switch (action.type) {
     case 'SAVE_FORM':
-      return action.payload;
+      return action.payload.value;
     case 'EREASE_FORM':
       return INITIAL_STATE;
     default:
