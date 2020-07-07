@@ -5,8 +5,7 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-import Input from '../../lib/components/Input';
-import CustomPicker from '../../components/CustomPicker';
+import Form from '../../components/Form';
 
 import styles from './styles';
 
@@ -69,40 +68,17 @@ const programmingLanguages = [
   },
 ];
 
-interface InputItem {
-  fieldType: string,
-  type: string,
-  label: string
-}
-
-export default (): JSX.Element => {
-
-  const InputList = (): any => items.map((item: InputItem, pos: number) => {
-    if (item.fieldType === 'input') {
-      return <Input key={pos} label={item.label} type={item.type} />;
-    }
-    return <CustomPicker
-      key={pos}
-      label={item.label}
-      items={programmingLanguages}
-      warn={false}
-    />;
-  });
-
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.contentContainer}
-        activeOpacity={1}
-        onPress={() => Keyboard.dismiss()}
-      >
-        <View style={styles.titleWrapper}>
-          <Text style={styles.formTitle}>Get started</Text>
-        </View>
-        <View style={styles.formContainer}>
-          <InputList />
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
+export default (): JSX.Element => (
+  <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.contentContainer}
+      activeOpacity={1}
+      onPress={() => Keyboard.dismiss()}
+    >
+      <View style={styles.titleWrapper}>
+        <Text style={styles.formTitle}>Get started</Text>
+      </View>
+      <Form inputItems={items} selectItems={programmingLanguages} />
+    </TouchableOpacity>
+  </View>
+);
