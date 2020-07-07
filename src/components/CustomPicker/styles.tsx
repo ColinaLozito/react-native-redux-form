@@ -48,10 +48,12 @@ export default StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.5)'
     },
     buttonContainer: {
-        justifyContent: 'flex-end',
-        flexDirection: 'row',
-        padding: 4,
-        backgroundColor: '#ececec',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        backgroundColor: colors.lightGrey,
+        height: 30,
+        paddingRight: 15,
+
     },
     picker: {
         backgroundColor: colors.white,
