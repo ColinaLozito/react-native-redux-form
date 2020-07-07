@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-import Input from '../../components/Input';
+import Input from '../../lib/components/Input';
 import CustomPicker from '../../components/CustomPicker';
 
 import styles from './styles';
@@ -41,7 +41,7 @@ const programmingLanguages = [
   },
   {
     label: 'JavaScript',
-    value: 'js',
+    value: 'JavaScript',
   },
   {
     label: 'Python',
@@ -81,7 +81,12 @@ export default (): JSX.Element => {
     if (item.fieldType === 'input') {
       return <Input key={pos} label={item.label} type={item.type} />;
     }
-    return <CustomPicker label={item.label} items={programmingLanguages} warn={false} />;
+    return <CustomPicker
+      key={pos}
+      label={item.label}
+      items={programmingLanguages}
+      warn={false}
+    />;
   });
 
   return (
@@ -90,7 +95,6 @@ export default (): JSX.Element => {
         style={styles.contentContainer}
         activeOpacity={1}
         onPress={() => Keyboard.dismiss()}
-
       >
         <View style={styles.titleWrapper}>
           <Text style={styles.formTitle}>Get started</Text>
