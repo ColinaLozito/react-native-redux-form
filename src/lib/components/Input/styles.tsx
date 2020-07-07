@@ -25,7 +25,7 @@ export default StyleSheet.create({
     },
     inputBox: {
         height: '100%',
-        width: '100%',
+        width: '85%',
         alignItems: 'center',
         fontSize: 18,
     },
@@ -33,7 +33,7 @@ export default StyleSheet.create({
         color: colors.darkGrey,
         fontSize: 17,
         fontWeight: 'bold',
-        marginRight: 10,
+        marginRight: '3%',
     },
     regular: {
         backgroundColor: colors.white,

@@ -76,7 +76,7 @@ export default (): JSX.Element => (
       onPress={() => Keyboard.dismiss()}
     >
       <View style={styles.titleWrapper}>
-        <Text style={styles.formTitle}>Get started</Text>
+        <Text style={styles.formTitle}>REDUX PERSIST FORM</Text>
       </View>
       <Form inputItems={items} selectItems={programmingLanguages} />
     </TouchableOpacity>

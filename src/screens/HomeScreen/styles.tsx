@@ -8,13 +8,15 @@ export default StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: '10%',
+    paddingVertical: '20%',
   },
   contentContainer: {
     backgroundColor: '#fff',
     width: '90%',
     height: '100%',
     flexDirection: 'column',
+    borderRadius: 5,
+    paddingHorizontal: '10%',
   },
   titleWrapper: {
     width: '100%',
@@ -26,8 +28,9 @@ export default StyleSheet.create({
   formTitle: {
     fontSize: 20,
     color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
+    lineHeight: 30,
+    textAlign: 'left',
+    fontWeight: 'bold'
 
-  },
+  }
 });
