@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
+import { StyleSheet, View } from 'react-native';
 import { AppLoading } from 'expo';
 import { Provider } from 'react-redux';
-import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './src/store';
 import HomeScreen from './src/screens/HomeScreen';
-import ErrorBoundary from './src/containers/ErrorBoundary'
+import ErrorBoundary from './src/containers/ErrorBoundary';
+
+import CountriesRepository from './src/repositories/countries';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +30,15 @@ const App: React.FC<Props> = ({ skipLoadingScreen }: Props) => {
   const [loadingComplete, setLoadingComplate] = useState<Loading>(false);
 
   const loadResourcesAsync: Async = async () => {
+    const countries = await SecureStore.getItemAsync('countries');
+    if (!countries) {
+      try {
+        const countriesList = await CountriesRepository.countriesList();
+        await SecureStore.setItemAsync('countries', countriesList);
+      } catch (error) {
+        console.log('error fetching countries', error);
+      }
+    }
     // here load resources at start of the app
   };
 
@@ -55,12 +66,9 @@ const App: React.FC<Props> = ({ skipLoadingScreen }: Props) => {
     <ErrorBoundary>
       <Provider store={store}>
         <PersistGate loading={<View />} persistor={persistor}>
-          <ActionSheetProvider>
-            <View style={styles.container}>
-              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-              <HomeScreen />
-            </View>
-          </ActionSheetProvider>
+          <View style={styles.container}>
+            <HomeScreen />
+          </View>
         </PersistGate>
       </Provider>
     </ErrorBoundary>
