@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import styles from './styles';
 
 interface Props {
-    type?: string,
-    editable?: boolean,
+    value: string,
+    type: string,
     label: string,
     warn?: boolean,
-    onChange?: (text: string) => void | undefined | null,
+    handleFormValueChange: (type: string, inputValue: string) => any,
 }
 
-const Input: React.FC<Props> = ({ type, editable, label, onChange, warn }: Props): any => {
-    const [text, setText] = useState<string>('');
+const Input: React.FC<Props> = ({
+    value,
+    type,
+    label,
+    warn,
+    handleFormValueChange,
+}: Props): React.ReactElement => {
 
-    const onChangeField = (t: string) => {
-        console.log(t);
-        setText(t);
+    const onChangeField = (inputValue: string) => {
+        handleFormValueChange(type, inputValue);
     };
 
     const keyboardType = () => {
@@ -52,9 +56,7 @@ const Input: React.FC<Props> = ({ type, editable, label, onChange, warn }: Props
                     style={[styles.inputBox, warn ? styles.warn : styles.regular]}
                     placeholder={label}
                     onChangeText={onChangeField}
-                    defaultValue={text}
-                    editable={editable}
-                    selectTextOnFocus={editable}
+                    defaultValue={value}
                     keyboardType={keyboardType()}
                     maxLength={maxInputLengh()}
                 />
@@ -65,10 +67,8 @@ const Input: React.FC<Props> = ({ type, editable, label, onChange, warn }: Props
 
 Input.defaultProps = {
     type: 'text',
-    editable: true,
     label: 'input',
     warn: false,
-    onChange: () => null,
 };
 
 export default Input;
