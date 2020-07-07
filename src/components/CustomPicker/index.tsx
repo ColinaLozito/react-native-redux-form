@@ -13,11 +13,17 @@ interface Props {
     items: Array<any>
     label: string,
     warn: boolean,
+    type: string,
+    value: string,
+    handleFormValueChange: (type: string, inputValue: string) => any,
 }
 
-const CustomPicker: React.FC<Props> = ({ items, label, warn }): any => {
+const CustomPicker: React.FC<Props> = ({ items, label, warn, type, value, handleFormValueChange }): any => {
     const [visible, setVisible] = useState<boolean>(false);
-    const [labelSelected, setLabelSelected] = useState<string>('');
+
+    const onLabelSelect = (inputValue: string) => {
+        handleFormValueChange(type, inputValue);
+    };
 
     return (
         <View style={styles.container}>
@@ -27,16 +33,16 @@ const CustomPicker: React.FC<Props> = ({ items, label, warn }): any => {
                     style={[styles.inputBox, warn ? styles.warn : styles.regular]}
                     placeholder={label}
                     editable={false}
-                    defaultValue={labelSelected}
+                    defaultValue={value}
                 />
                 <TouchableOpacity style={styles.touchable} onPress={() => setVisible(true)} />
             </View>
             <PickerModal
                 visible={visible}
-                value={labelSelected}
+                value={value}
                 setVisible={setVisible}
                 items={items}
-                onSelect={setLabelSelected}
+                onSelect={onLabelSelect}
             />
         </View>
     );
