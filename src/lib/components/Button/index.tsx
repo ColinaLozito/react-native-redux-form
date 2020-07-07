@@ -4,7 +4,7 @@ import styles from './styles';
 
 interface Props {
     label: string,
-    onSubmit: () => any,
+    onSubmit: (() => any) | undefined,
     disabled?: boolean
 }
 
