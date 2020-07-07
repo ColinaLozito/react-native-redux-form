@@ -23,8 +23,8 @@ interface Props {
     selectItems: Array<any>,
     inputItems: Array<any>
     form?: any | Form,
-    onSubmit?: () => any,
-    onSaveForm?: () => any
+    onSubmit: () => any,
+    onSaveForm: (obj: any) => any
 }
 
 interface InputItem {
@@ -35,7 +35,7 @@ interface InputItem {
 
 const Form: React.FC<Props> = ({ selectItems, inputItems, form, onSubmit, onSaveForm }): any => {
 
-    const [formValues, handleFormValueChange] = formData({});
+    const [formValues, handleFormValueChange, setFormValues] = formData({}, onSaveForm);
 
     const inputList = (): any => inputItems.map((item: InputItem, pos: number) => {
         if (item.fieldType === 'input') {
@@ -65,15 +65,25 @@ const Form: React.FC<Props> = ({ selectItems, inputItems, form, onSubmit, onSave
             <View style={styles.inputWrapper}>
                 {inputList()}
             </View>
-            <Button label="submit" onSubmit={onSubmit} />
+            <Button
+                label="submit"
+                onSubmit={onSubmit}
+                setFormValues={setFormValues}
+            />
         </View>
     );
 };
 
+Form.defaultProps = {
+    onSubmit: () => null,
+    onSaveForm: () => null,
+};
+
+
 export default connect(
     getFormState,
     {
-        onSubmit: ereaseForm,
         onSaveForm: saveForm,
+        onSubmit: ereaseForm,
     }
 )(Form);

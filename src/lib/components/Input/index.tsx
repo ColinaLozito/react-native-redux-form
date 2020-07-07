@@ -66,8 +66,6 @@ const Input: React.FC<Props> = ({
 };
 
 Input.defaultProps = {
-    type: 'text',
-    label: 'input',
     warn: false,
 };
 
