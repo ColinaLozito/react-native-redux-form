@@ -5,7 +5,8 @@ const validatePhone = (phone: string): boolean => {
 };
 
 const isValidPhone = (phone: string): boolean => {
-    if (validatePhone(phone)){
+    const phonePrefix = '+46';
+    if (validatePhone(phonePrefix + phone)){
         return true;
     }
     return false;
