@@ -18,8 +18,7 @@ export default StyleSheet.create({
     inputWrapper: {
         width: '100%',
         height: 40,
-        borderBottomWidth: 1,
-        borderBottomColor: colors.lightGrey,
+
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -31,15 +30,24 @@ export default StyleSheet.create({
     },
     phonePrefix: {
         color: colors.darkGrey,
-        fontSize: 17,
-        fontWeight: 'bold',
-        marginRight: '3%',
+        fontSize: 18,
+        marginRight: '4%',
     },
     regular: {
-        backgroundColor: colors.white,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.lightGrey,
+    },
+    valid: {
+        borderBottomWidth: 1,
+        borderBottomColor: colors.lightGreen,
     },
     warn: {
-        backgroundColor: colors.errorLight,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.errorLight,
+    },
+    errorMessage: {
+        color: colors.errorLight,
+        fontSize: 12,
     },
 
 });
