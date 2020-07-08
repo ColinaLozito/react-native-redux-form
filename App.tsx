@@ -55,7 +55,6 @@ const App: React.FC<Props> = ({ skipLoadingScreen }: Props) => {
   if (!loadingComplete && !skipLoadingScreen) {
     return (
       <AppLoading
-        // @ts-ignore
         startAsync={loadResourcesAsync}
         onError={handleLoadingError}
         onFinish={handleFinishLoading}
