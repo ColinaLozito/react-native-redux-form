@@ -6,26 +6,17 @@ interface Props {
     label: string,
     onSubmit: (() => any),
     disabled?: boolean,
-    setFormValues: (obj: any) => void
 }
 
-const Button: React.FC<Props> = ({ label, onSubmit, disabled, setFormValues }) => {
-
-    const onPressSubmit = () => {
-        setFormValues({});
-        onSubmit();
-    };
-
-    return (
-        <TouchableOpacity
-            onPress={onPressSubmit}
-            disabled={disabled}
-            style={styles.button}
-        >
-            <Text style={styles.label}>{label.toUpperCase()}</Text>
-        </TouchableOpacity>
-    );
-};
+const Button: React.FC<Props> = ({ label, onSubmit, disabled }) => (
+    <TouchableOpacity
+        onPress={onSubmit}
+        disabled={disabled}
+        style={styles.button}
+    >
+        <Text style={styles.label}>{label.toUpperCase()}</Text>
+    </TouchableOpacity>
+);
 
 Button.defaultProps = {
     disabled: false,
