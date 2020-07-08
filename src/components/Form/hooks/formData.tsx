@@ -49,6 +49,15 @@ export default (onSaveForm: ((obj: any) => any), onSubmit: (() => any), form: an
     };
     // validate input value and set it into form state
     const handleFormValidate = (key: string, value: string) => {
+        onSaveForm(
+            {
+                ...formValues,
+                [key]: {
+                    value,
+                    valid: inputValidation(key, value),
+                },
+            }
+        );
         setFormValues(
             {
                 ...formValues,
