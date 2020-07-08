@@ -28,10 +28,17 @@ export default StyleSheet.create({
         backgroundColor: colors.white,
         borderRadius: 7,
     },
-    modalItem: {
+    errorMessage: {
         fontSize: 18,
         fontWeight: '500',
         marginVertical: 10,
         color: colors.errorLight,
+    },
+    successMessage: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: colors.lightGreen,
+        width: '100%',
+        textAlign: 'center',
     },
 });
