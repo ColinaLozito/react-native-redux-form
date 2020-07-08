@@ -6,7 +6,25 @@ interface Props {
     value: string,
     type: string,
     label: string,
-    warn?: boolean,
+    valid?: boolean | null,
+    maxLength?: any | undefined,
+    keyboardType?: (
+        'default' |
+        'email-address' |
+        'numeric' |
+        'phone-pad' |
+        'number-pad' |
+        'decimal-pad' |
+        'visible-password' |
+        'ascii-capable' |
+        'numbers-and-punctuation' |
+        'url' |
+        'name-phone-pad' |
+        'twitter' |
+        'web-search' |
+        undefined
+    ),
+    handleFormValidate: (type: string, inputValue: string) => any,
     handleFormValueChange: (type: string, inputValue: string) => any,
 }
 
@@ -14,59 +32,64 @@ const Input: React.FC<Props> = ({
     value,
     type,
     label,
-    warn,
+    valid,
+    maxLength,
+    keyboardType,
     handleFormValueChange,
+    handleFormValidate,
 }: Props): React.ReactElement => {
-
     const onChangeField = (inputValue: string) => {
         handleFormValueChange(type, inputValue);
     };
 
-    const keyboardType = () => {
-        if (type === 'phone') {
-            return 'number-pad';
+    const onInputBlur = () => {
+        if (value) {
+            handleFormValidate(type, value);
         }
-        if (type === 'ssn') {
-            return 'number-pad';
-        }
-        return 'default';
     };
 
-    const maxInputLengh = () => {
-        switch (type) {
-            case 'ssn':
-                return 10;
-            case 'phone':
-                return 9;
+    const validFieldClassSelector = (): any => {
+        switch (valid) {
+            case true:
+                return styles.regular;
+            case false:
+                return styles.warn;
             default:
-                return 35;
+                return styles.regular;
         }
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{label}</Text>
-            <View style={styles.inputWrapper}>
-                {
-                    type === 'phone' && (
-                        <Text style={styles.phonePrefix}>+46</Text>
-                    )
-                }
+            <View style={[styles.inputWrapper, validFieldClassSelector()]}>
+                {type === 'phone' && (
+                    <TextInput
+                        style={[styles.phonePrefix]}
+                        defaultValue={'+46'}
+                        editable={false}
+                    />
+                )}
                 <TextInput
-                    style={[styles.inputBox, warn ? styles.warn : styles.regular]}
+                    style={styles.inputBox}
                     placeholder={label}
                     onChangeText={onChangeField}
                     defaultValue={value}
-                    keyboardType={keyboardType()}
-                    maxLength={maxInputLengh()}
+                    keyboardType={keyboardType}
+                    maxLength={maxLength}
+                    onBlur={onInputBlur}
                 />
             </View>
+            {valid === false && (
+                <Text style={styles.errorMessage}>Please verify this field</Text>
+            )}
         </View>
     );
 };
 
 Input.defaultProps = {
-    warn: false,
+    keyboardType: 'default',
+    maxLength: 30,
 };
 
 export default Input;
