@@ -16,4 +16,5 @@ export default {
   lightGrey: '#d6d6d6',
   white: '#ffffff',
   errorLight: '#fa8282',
+  lightGreen: '#6cf0c2',
 };
