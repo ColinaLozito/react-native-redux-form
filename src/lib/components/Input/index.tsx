@@ -2,28 +2,30 @@ import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import styles from './styles';
 
+type KeyboardType = (
+    'default' |
+    'email-address' |
+    'numeric' |
+    'phone-pad' |
+    'number-pad' |
+    'decimal-pad' |
+    'visible-password' |
+    'ascii-capable' |
+    'numbers-and-punctuation' |
+    'url' |
+    'name-phone-pad' |
+    'twitter' |
+    'web-search'
+)
+
 interface Props {
     value: string,
     type: string,
     label: string,
     valid?: boolean | null,
     maxLength?: any | undefined,
-    keyboardType?: (
-        'default' |
-        'email-address' |
-        'numeric' |
-        'phone-pad' |
-        'number-pad' |
-        'decimal-pad' |
-        'visible-password' |
-        'ascii-capable' |
-        'numbers-and-punctuation' |
-        'url' |
-        'name-phone-pad' |
-        'twitter' |
-        'web-search' |
-        undefined
-    ),
+    keyboardType?: KeyboardType | undefined
+    ,
     handleFormValidate: (type: string, inputValue: string) => any,
     handleFormValueChange: (type: string, inputValue: string) => any,
 }
@@ -51,7 +53,7 @@ const Input: React.FC<Props> = ({
     const validFieldClassSelector = (): any => {
         switch (valid) {
             case true:
-                return styles.regular;
+                return styles.valid;
             case false:
                 return styles.warn;
             default:
@@ -80,9 +82,14 @@ const Input: React.FC<Props> = ({
                     onBlur={onInputBlur}
                 />
             </View>
-            {valid === false && (
-                <Text style={styles.errorMessage}>Please verify this field</Text>
-            )}
+            {valid === false &&
+                (
+                    <Text style={styles.errorMessage}>Please verify this field</Text>
+                )}
+            {valid === true &&
+                (
+                    <Text style={styles.validMessage}>Valid field</Text>
+                )}
         </View>
     );
 };

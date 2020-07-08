@@ -49,5 +49,9 @@ export default StyleSheet.create({
         color: colors.errorLight,
         fontSize: 12,
     },
+    validMessage: {
+        color: colors.lightGreen,
+        fontSize: 12,
+    },
 
 });
