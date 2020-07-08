@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
 } from 'react-native';
@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Input from '../../lib/components/Input';
 import Button from '../../lib/components/Button';
 import CustomPicker from '../../components/CustomPicker';
+import WarningModal from './WarningModal';
 import { getFormState, saveForm, ereaseForm } from '../../store/action';
 
 import formData from './formData';
@@ -34,18 +35,34 @@ interface InputItem {
 }
 
 const Form: React.FC<Props> = ({ selectItems, inputItems, form, onSubmit, onSaveForm }): any => {
+    const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
 
-    const [formValues, handleFormValueChange, setFormValues] = formData({}, onSaveForm);
+    const [
+        formValues,
+        handleFormValueChange,
+        setFormValues,
+        handleFormValidate,
+        maxInputLengh,
+        keyboardType,
+    ] = formData({}, onSaveForm, form);
+
+
 
     const inputList = (): any => inputItems.map((item: InputItem, pos: number) => {
+        const value = formValues[item.type] ? formValues[item.type].value : '';
+        const valid = formValues[item.type] ? formValues[item.type].valid : null;
         if (item.fieldType === 'input') {
             return (
                 <Input
                     key={pos}
                     label={item.label}
                     type={item.type}
-                    value={form[item.type] || formValues[item.type]}
+                    value={value}
+                    valid={valid}
+                    maxLength={maxInputLengh()}
+                    keyboardType={keyboardType(item.type)}
                     handleFormValueChange={handleFormValueChange}
+                    handleFormValidate={handleFormValidate}
                 />
             );
         }
@@ -55,7 +72,7 @@ const Form: React.FC<Props> = ({ selectItems, inputItems, form, onSubmit, onSave
             items={selectItems}
             warn={false}
             type={item.type}
-            value={form[item.type] || formValues[item.type]}
+            value={value}
             handleFormValueChange={handleFormValueChange}
         />;
     });
@@ -67,9 +84,10 @@ const Form: React.FC<Props> = ({ selectItems, inputItems, form, onSubmit, onSave
             </View>
             <Button
                 label="submit"
-                onSubmit={onSubmit}
+                onSubmit={() => setShowErrorModal(true)}
                 setFormValues={setFormValues}
             />
+            <WarningModal setShowErrorModal={setShowErrorModal} visible={showErrorModal} />
         </View>
     );
 };
