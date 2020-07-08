@@ -29,6 +29,7 @@ To build and compile the app:
 7. Done!!!
 
 # Screen
+![unnamed (1)](https://user-images.githubusercontent.com/18740032/86967998-b32db500-c16b-11ea-8d5a-92e056c417a7.gif)
 
 ### NOTE:
 there are things to be improved. :) 
